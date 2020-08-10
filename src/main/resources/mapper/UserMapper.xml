@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiayeli.blog.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="favorite" jdbcType="VARCHAR" property="favorite" />
+    <result column="comments" jdbcType="VARCHAR" property="comments" />
+    <result column="useful" jdbcType="VARCHAR" property="useful" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pwd, favorite, comments, useful
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jiayeli.blog.model.User">
+    insert into user (id, pwd, favorite, 
+      comments, useful)
+    values (#{id,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{favorite,jdbcType=VARCHAR}, 
+      #{comments,jdbcType=VARCHAR}, #{useful,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiayeli.blog.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="favorite != null">
+        favorite,
+      </if>
+      <if test="comments != null">
+        comments,
+      </if>
+      <if test="useful != null">
+        useful,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="favorite != null">
+        #{favorite,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="useful != null">
+        #{useful,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiayeli.blog.model.User">
+    update user
+    <set>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="favorite != null">
+        favorite = #{favorite,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        comments = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="useful != null">
+        useful = #{useful,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiayeli.blog.model.User">
+    update user
+    set pwd = #{pwd,jdbcType=VARCHAR},
+      favorite = #{favorite,jdbcType=VARCHAR},
+      comments = #{comments,jdbcType=VARCHAR},
+      useful = #{useful,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

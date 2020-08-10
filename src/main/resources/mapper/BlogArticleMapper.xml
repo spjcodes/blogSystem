@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiayeli.blog.dao.BlogArticleMapper">
+  <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.BlogArticle">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="bolgCover" jdbcType="VARCHAR" property="bolgcover" />
+    <result column="typeId" jdbcType="VARCHAR" property="typeid" />
+    <result column="isComment" jdbcType="INTEGER" property="iscomment" />
+    <result column="isOriginal" jdbcType="BIT" property="isoriginal" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="isUseful" jdbcType="INTEGER" property="isuseful" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, intro, bolgCover, typeId, isComment, isOriginal, createTime, isUseful
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blogarticle
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from blogarticle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jiayeli.blog.model.BlogArticle">
+    insert into blogarticle (id, title, intro, 
+      bolgCover, typeId, isComment, 
+      isOriginal, createTime, isUseful
+      )
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{bolgcover,jdbcType=VARCHAR}, #{typeid,jdbcType=VARCHAR}, #{iscomment,jdbcType=INTEGER}, 
+      #{isoriginal,jdbcType=BIT}, #{createtime,jdbcType=TIMESTAMP}, #{isuseful,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiayeli.blog.model.BlogArticle">
+    insert into blogarticle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="bolgcover != null">
+        bolgCover,
+      </if>
+      <if test="typeid != null">
+        typeId,
+      </if>
+      <if test="iscomment != null">
+        isComment,
+      </if>
+      <if test="isoriginal != null">
+        isOriginal,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="isuseful != null">
+        isUseful,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="bolgcover != null">
+        #{bolgcover,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="iscomment != null">
+        #{iscomment,jdbcType=INTEGER},
+      </if>
+      <if test="isoriginal != null">
+        #{isoriginal,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isuseful != null">
+        #{isuseful,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiayeli.blog.model.BlogArticle">
+    update blogarticle
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="bolgcover != null">
+        bolgCover = #{bolgcover,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        typeId = #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="iscomment != null">
+        isComment = #{iscomment,jdbcType=INTEGER},
+      </if>
+      <if test="isoriginal != null">
+        isOriginal = #{isoriginal,jdbcType=BIT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isuseful != null">
+        isUseful = #{isuseful,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiayeli.blog.model.BlogArticle">
+    update blogarticle
+    set title = #{title,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      bolgCover = #{bolgcover,jdbcType=VARCHAR},
+      typeId = #{typeid,jdbcType=VARCHAR},
+      isComment = #{iscomment,jdbcType=INTEGER},
+      isOriginal = #{isoriginal,jdbcType=BIT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      isUseful = #{isuseful,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectArticlesByType" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select <include refid="Base_Column_List"/>
+    from blogarticle
+    where typeId = #{typeid,jdbcType=VARCHAR},
+  </select>
+  <select id="selectAllBlogArticles" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from blogarticle
+  </select>
+</mapper>
