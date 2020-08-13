@@ -1,7 +1,6 @@
 package com.jiayeli.blog.dao;
 
 import com.jiayeli.blog.model.ArticleType;
-
 import java.util.List;
 
 public interface ArticleTypeMapper {

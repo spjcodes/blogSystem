@@ -1,6 +1,7 @@
 package com.jiayeli.blog.dao;
 
 import com.jiayeli.blog.model.User;
+import org.springframework.stereotype.Repository;
 
 public interface UserMapper {
     int deleteByPrimaryKey(String id);

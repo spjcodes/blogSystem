@@ -1,6 +1,7 @@
 package com.jiayeli.blog.dao;
 
 import com.jiayeli.blog.model.Recommend;
+import org.springframework.stereotype.Repository;
 
 public interface RecommendMapper {
     int deleteByPrimaryKey(String id);

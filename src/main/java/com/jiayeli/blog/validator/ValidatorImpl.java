@@ -1,11 +1,16 @@
 package com.jiayeli.blog.validator;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
+@Controller
 public class ValidatorImpl implements InitializingBean {
 
     private Validator validator;

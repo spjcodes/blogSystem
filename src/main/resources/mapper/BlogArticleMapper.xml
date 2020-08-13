@@ -141,7 +141,7 @@
   <select id="selectArticlesByType" parameterType="java.lang.String" resultMap="BaseResultMap" >
     select <include refid="Base_Column_List"/>
     from blogarticle
-    where typeId = #{typeid,jdbcType=VARCHAR},
+    where typeId = #{typeid,jdbcType=VARCHAR}
   </select>
   <select id="selectAllBlogArticles" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>

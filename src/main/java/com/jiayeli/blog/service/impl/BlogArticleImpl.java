@@ -6,6 +6,8 @@ import com.jiayeli.blog.service.BlogArticleSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,8 +19,9 @@ public class BlogArticleImpl implements BlogArticleSer {
     @Override
     public boolean addBlogArticle(BlogArticle blogArticle) {
         try {
-            int i = blogArticleMapper.insertSelective(blogArticle);
-            return i>0?true:false;
+            blogArticle.setCreatetime(new Date(System.currentTimeMillis()));
+            blogArticleMapper.insertSelective(blogArticle);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,6 +36,7 @@ public class BlogArticleImpl implements BlogArticleSer {
 
     @Override
     public boolean updateBlogArticle(BlogArticle blogArticle) {
+        blogArticle.setCreatetime((Date.from(Instant.ofEpochSecond(System.currentTimeMillis()))));
         int i = blogArticleMapper.updateByPrimaryKey(blogArticle);
         return i>0?true:false;
     }
@@ -40,16 +44,18 @@ public class BlogArticleImpl implements BlogArticleSer {
     @Override
     public BlogArticle getBlogArticleById(String id) {
         BlogArticle blogArticle = blogArticleMapper.selectByPrimaryKey(id);
-        return blogArticle!=null?blogArticle:null;
+        return blogArticle;
     }
 
     @Override
     public List<BlogArticle> getBlogArticlesByType(String type) {
+
         return blogArticleMapper.selectArticlesByType(type);
     }
 
     @Override
     public List<BlogArticle> getAllBlogArticles() {
+
         return blogArticleMapper.selectAllBlogArticles();
     }
 }

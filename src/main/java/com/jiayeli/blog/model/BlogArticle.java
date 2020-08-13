@@ -1,10 +1,14 @@
 package com.jiayeli.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class BlogArticle {
     private String id;
 
+    @NotBlank(message = "标题不能为空")
     private String title;
 
     private String intro;
@@ -17,6 +21,8 @@ public class BlogArticle {
 
     private Boolean isoriginal;
 
+    //将请求发来 yyyy-MM-dd HH:mm:ss形式的String类型的数据解析为date
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createtime;
 
     private Integer isuseful;

@@ -1,9 +1,12 @@
 package com.jiayeli.blog.dao;
 
 import com.jiayeli.blog.model.BlogArticle;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface BlogArticleMapper {
     int deleteByPrimaryKey(String id);
 

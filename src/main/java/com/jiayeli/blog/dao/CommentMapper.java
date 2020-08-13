@@ -1,6 +1,7 @@
 package com.jiayeli.blog.dao;
 
 import com.jiayeli.blog.model.Comment;
+import org.springframework.stereotype.Repository;
 
 public interface CommentMapper {
     int deleteByPrimaryKey(String id);

@@ -16,19 +16,18 @@ public class BusinessException extends Exception implements CommonErro {
     }
 
 
-
     @Override
     public int getErroCode() {
-        return 0;
+        return commonErro.getErroCode();
     }
 
     @Override
     public String getErroMsg() {
-        return null;
+        return commonErro.getErroMsg();
     }
 
     @Override
     public CommonErro setErroMsg(String erroMsg) {
-        return null;
+        return commonErro.setErroMsg(erroMsg);
     }
 }
