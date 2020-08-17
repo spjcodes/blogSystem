@@ -1,6 +1,7 @@
 package com.jiayeli.blog.control;
 
 import com.jiayeli.blog.erros.BusinessException;
+import com.jiayeli.blog.erros.CommonErro;
 import com.jiayeli.blog.erros.CommonErroEum;
 import com.jiayeli.blog.model.BlogArticle;
 import com.jiayeli.blog.service.BlogArticleSer;
@@ -11,8 +12,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("blogArticle")
 @Controller
@@ -82,12 +86,24 @@ public class BlogArticleCon extends BaseControl {
         return CommonReturnType.create(bls);
     }
 
-    @CrossOrigin
     @GetMapping("getBlogArticleList")
     @ResponseBody
     public CommonReturnType getBlogArticleList() throws BusinessException {
         List<BlogArticle> allBlogArticles = blogArticleSer.getAllBlogArticles();
         return CommonReturnType.create(allBlogArticles);
+    }
+
+
+    @PostMapping("uploadFile")
+    @ResponseBody
+    public CommonReturnType uploadFile(MultipartFile multFile) throws BusinessException {
+        if (multFile.isEmpty())
+            throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
+        String filePaht = "d:/booksmsFiles/";
+        Map map = this.blogArticleSer.fileUpload(filePaht, multFile);
+        if (map.isEmpty())
+            return CommonReturnType.create("faild", "文件存储失败");
+        return CommonReturnType.create(map);
     }
 
 

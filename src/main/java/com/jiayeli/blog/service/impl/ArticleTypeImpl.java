@@ -5,7 +5,6 @@ import com.jiayeli.blog.model.ArticleType;
 import com.jiayeli.blog.service.ArticleTypeSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -38,4 +37,7 @@ public class ArticleTypeImpl implements ArticleTypeSer {
     public List<ArticleType> getAllArticleType() {
         return articleTypeMapper.selectAll();
     }
+
+
+
 }
