@@ -21,12 +21,18 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jiayeli.blog.model.ArticleType">
+    <selectKey keyProperty="id" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into articletype (id, typeName, icon, 
       totals)
     values (#{id,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
       #{totals,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jiayeli.blog.model.ArticleType">
+    <selectKey keyProperty="id" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into articletype
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -82,5 +88,9 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     from articletype
+  </select>
+
+  <select id="selectTypes" resultType="string">
+    select typeName from articletype;
   </select>
 </mapper>

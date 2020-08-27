@@ -37,6 +37,13 @@ public class ArticleTypeControl {
         return CommonReturnType.create(b);
     }
 
+    @GetMapping("getTypes")
+    @ResponseBody
+    public CommonReturnType getTypes() {
+        List types = this.articleTypeSer.getTypes();
+        return CommonReturnType.create(types);
+    }
+
     @PostMapping("updateArticleType")
     @ResponseBody
     public CommonReturnType updateArticleType(@RequestBody ArticleType articleType) throws BusinessException {
@@ -60,10 +67,20 @@ public class ArticleTypeControl {
         return CommonReturnType.create(b);
     }
 
-    @GetMapping("getArticleTypes")
+    @GetMapping("getArticleTypeList")
     @ResponseBody
     public CommonReturnType getArticleTypes() {
         List<ArticleType> allArticleType = articleTypeSer.getAllArticleType();
         return CommonReturnType.create(allArticleType);
+    }
+
+    @PostMapping("getArticleTypeById")
+    @ResponseBody
+    public CommonReturnType getArticleById(@RequestBody ArticleType articleType) {
+        ArticleType type = articleTypeSer.getArticleTypeByid(articleType.getId());
+        if (type != null)
+            return CommonReturnType.create(type);
+        else
+            return CommonReturnType.create("faild", type);
     }
 }

@@ -11,4 +11,6 @@ public interface ArticleTypeSer {
     boolean updateArticleType(ArticleType blogArticle);
     ArticleType getArticleTypeByid(String id);
     List<ArticleType> getAllArticleType();
+
+    List getTypes();
 }

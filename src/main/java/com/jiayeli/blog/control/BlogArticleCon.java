@@ -1,7 +1,7 @@
 package com.jiayeli.blog.control;
 
+import com.jiayeli.blog.control.base.BaseControl;
 import com.jiayeli.blog.erros.BusinessException;
-import com.jiayeli.blog.erros.CommonErro;
 import com.jiayeli.blog.erros.CommonErroEum;
 import com.jiayeli.blog.model.BlogArticle;
 import com.jiayeli.blog.service.BlogArticleSer;
@@ -104,6 +104,12 @@ public class BlogArticleCon extends BaseControl {
         if (map.isEmpty())
             return CommonReturnType.create("faild", "文件存储失败");
         return CommonReturnType.create(map);
+    }
+
+    @RequestMapping("ckeditorUpload")
+    @ResponseBody
+    public String ckeditorUpload(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) throws Exception {
+        return this.blogArticleSer.ckeditUpload(file, CKEditorFuncNum);
     }
 
 

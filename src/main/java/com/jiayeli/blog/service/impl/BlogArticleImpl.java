@@ -41,7 +41,7 @@ public class BlogArticleImpl implements BlogArticleSer {
 
     @Override
     public boolean updateBlogArticle(BlogArticle blogArticle) {
-        blogArticle.setCreatetime((Date.from(Instant.ofEpochSecond(System.currentTimeMillis()))));
+        //blogArticle.setCreatetime((Date.from(Instant.ofEpochSecond(System.currentTimeMillis()))));
         int i = blogArticleMapper.updateByPrimaryKey(blogArticle);
         return i>0?true:false;
     }
@@ -96,5 +96,32 @@ public class BlogArticleImpl implements BlogArticleSer {
 
 
         return m;
+    }
+
+    public String ckeditUpload(MultipartFile file, String ckEditorFuncNum) {
+        if (!file.isEmpty()) {
+            String finename=file.getOriginalFilename();
+            String suffixname=file.getOriginalFilename().substring(finename.lastIndexOf("."));
+            finename=String.valueOf(System.currentTimeMillis())+suffixname;
+            String filepath="d:/booksmsFiles/";
+            File tf=new File(filepath);
+            if(!tf.exists()){
+                tf.mkdir();
+            }
+            String savefile=filepath+finename;
+            try {
+                file.transferTo(new File(savefile));
+                String url="http://localhost:8080/"+finename;
+                return "{\"uploaded\":1,\"fileName\":\""+savefile+"\",\"url\":\"" + url + "\"}";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
+
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
+            }
+        }
+        return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
     }
 }

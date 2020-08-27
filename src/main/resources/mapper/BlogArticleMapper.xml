@@ -7,6 +7,7 @@
     <result column="intro" jdbcType="VARCHAR" property="intro" />
     <result column="bolgCover" jdbcType="VARCHAR" property="bolgcover" />
     <result column="typeId" jdbcType="VARCHAR" property="typeid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="isComment" jdbcType="INTEGER" property="iscomment" />
     <result column="isOriginal" jdbcType="BIT" property="isoriginal" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
@@ -26,7 +27,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jiayeli.blog.model.BlogArticle">
-    insert into blogarticle (id, title, intro, 
+    <selectKey keyProperty="id" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
+    insert into blogarticle (id, title, intro,
       bolgCover, typeId, isComment, 
       isOriginal, createTime, isUseful
       )
@@ -36,6 +40,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jiayeli.blog.model.BlogArticle">
+    <selectKey keyProperty="id" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into blogarticle
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -52,6 +59,9 @@
       </if>
       <if test="typeid != null">
         typeId,
+      </if>
+      <if test="content != null">
+        content,
       </if>
       <if test="iscomment != null">
         isComment,
@@ -81,6 +91,9 @@
       </if>
       <if test="typeid != null">
         #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
       </if>
       <if test="iscomment != null">
         #{iscomment,jdbcType=INTEGER},
@@ -132,6 +145,7 @@
       intro = #{intro,jdbcType=VARCHAR},
       bolgCover = #{bolgcover,jdbcType=VARCHAR},
       typeId = #{typeid,jdbcType=VARCHAR},
+      content = #{content, jdbcType=VARCHAR},
       isComment = #{iscomment,jdbcType=INTEGER},
       isOriginal = #{isoriginal,jdbcType=BIT},
       createTime = #{createtime,jdbcType=TIMESTAMP},

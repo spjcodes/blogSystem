@@ -38,6 +38,8 @@ public class ArticleTypeImpl implements ArticleTypeSer {
         return articleTypeMapper.selectAll();
     }
 
-
-
+    @Override
+    public List getTypes() {
+        return articleTypeMapper.selectTypes();
+    }
 }

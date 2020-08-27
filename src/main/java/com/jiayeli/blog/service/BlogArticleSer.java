@@ -16,4 +16,5 @@ public interface BlogArticleSer {
     List<BlogArticle> getAllBlogArticles();
     Map fileUpload(String filePath, MultipartFile uploadFile);
 
+    String ckeditUpload(MultipartFile file, String ckEditorFuncNum);
 }

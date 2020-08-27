@@ -21,6 +21,16 @@ public class BlogArticle {
 
     private Boolean isoriginal;
 
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     //将请求发来 yyyy-MM-dd HH:mm:ss形式的String类型的数据解析为date
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createtime;

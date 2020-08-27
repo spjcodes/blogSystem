@@ -1,4 +1,4 @@
-package com.jiayeli.blog.control;
+package com.jiayeli.blog.control.base;
 
 import com.jiayeli.blog.erros.BusinessException;
 import com.jiayeli.blog.erros.CommonErroEum;
