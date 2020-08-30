@@ -64,6 +64,7 @@
                selectByExampleQueryId="false">
         </table>-->
 
+        <!--
         <table tableName="comment" domainObjectName="Comment" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -73,7 +74,18 @@
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+-->
 
+     <!--   <table tableName="resumer" domainObjectName="Resumer" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+
+        </table> -->
+
+        <table tableName="self_intro" domainObjectName="SelfIntro" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
 
 
 

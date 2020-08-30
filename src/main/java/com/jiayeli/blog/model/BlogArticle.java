@@ -1,6 +1,8 @@
 package com.jiayeli.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -19,9 +21,14 @@ public class BlogArticle {
 
     private Integer iscomment;
 
+    @Getter
+    @Setter
+    private Integer editType;
+
     private Boolean isoriginal;
 
     private String content;
+
 
     public String getContent() {
         return content;
@@ -36,6 +43,10 @@ public class BlogArticle {
     private Date createtime;
 
     private Integer isuseful;
+
+    @Getter
+    @Setter
+    private Integer visits;
 
     public String getId() {
         return id;

@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -96,6 +95,11 @@ public class BlogArticleImpl implements BlogArticleSer {
 
 
         return m;
+    }
+
+    @Override
+    public void visitsCount(String id) {
+        this.blogArticleMapper.visitsCount(id);
     }
 
     public String ckeditUpload(MultipartFile file, String ckEditorFuncNum) {

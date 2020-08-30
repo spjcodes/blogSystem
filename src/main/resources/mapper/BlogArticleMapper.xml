@@ -9,12 +9,14 @@
     <result column="typeId" jdbcType="VARCHAR" property="typeid" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="isComment" jdbcType="INTEGER" property="iscomment" />
+    <result column="editType" jdbcType="INTEGER" property="editType" />
     <result column="isOriginal" jdbcType="BIT" property="isoriginal" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="isUseful" jdbcType="INTEGER" property="isuseful" />
+    <result column="visits" jdbcType="INTEGER" property="visits" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, intro, bolgCover, typeId, isComment, isOriginal, createTime, isUseful
+    id, title, intro, bolgCover, typeId, content, isComment, isOriginal, createTime, isUseful, editType, visits
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -161,4 +163,10 @@
     select <include refid="Base_Column_List"/>
     from blogarticle
   </select>
+
+  <update id="visitsCount" parameterType="string">
+    update blog.blogarticle
+    set visits = visits + 1
+    where id = #{id, jdbcType=VARCHAR}
+  </update>
 </mapper>

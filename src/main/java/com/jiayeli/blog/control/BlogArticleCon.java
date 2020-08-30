@@ -112,6 +112,12 @@ public class BlogArticleCon extends BaseControl {
         return this.blogArticleSer.ckeditUpload(file, CKEditorFuncNum);
     }
 
+    @PostMapping("visitsCount")
+    @ResponseBody
+    public void visitsCount(@RequestBody BlogArticle blogArticle) {
+        this.blogArticleSer.visitsCount(blogArticle.getId());
+    }
+
 
 
 }

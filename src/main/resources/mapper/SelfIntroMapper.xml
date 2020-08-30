@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiayeli.blog.dao.SelfIntroMapper">
+  <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.SelfIntro">
+    <result column="id" jdbcType="BIT" property="id" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+  </resultMap>
+  <sql id="baseField">
+    id, intro, icon
+  </sql>
+
+  <insert id="insert" parameterType="com.jiayeli.blog.model.SelfIntro">
+    <selectKey keyProperty="id" resultType="string" order="BEFORE">
+      select replace(uuid(), '-', '') from dual
+    </selectKey>
+    insert into self_intro (id, intro, icon)
+    values (#{id,jdbcType=BIT}, #{intro,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiayeli.blog.model.SelfIntro">
+    insert into self_intro
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIT},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+
+
+  <update id="updateSelfIntro" parameterType="com.jiayeli.blog.model.SelfIntro">
+    update self_intro s
+    set intro = #{intro, jdbcType=VARCHAR}, icon = #{icon, jdbcType=VARCHAR}
+    where
+     id = #{id, jdbcType=TINYINT}
+  </update>
+
+    <select id="getSelfIntro" parameterType="int" resultMap="BaseResultMap">
+        select <include refid="baseField" />
+        from self_intro
+        where id = #{id, jdbcType=TINYINT}
+    </select>
+</mapper>

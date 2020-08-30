@@ -23,4 +23,6 @@ public interface BlogArticleMapper {
     List<BlogArticle> selectArticlesByType(String type);
 
     List<BlogArticle> selectAllBlogArticles();
+
+    void visitsCount(String id);
 }
