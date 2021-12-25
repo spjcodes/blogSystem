@@ -19,7 +19,7 @@ create table if not exists blog.blogarticle (
     ,intro varchar(200)
     ,bolgCover varchar(100)
     ,typeId varchar(100)
-    ,content Blob
+    ,content text
     ,isComment bit
     ,editType bit
     ,isOriginal bit
