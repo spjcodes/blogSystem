@@ -20,7 +20,7 @@
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/blog?nullCatalogMeansCurrent=true&amp;useUnicode=true&amp;characterEncodeing=utf-8&amp;serverTimezone=GMT&amp;2B8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"/>
                 <property name="username" value="root"/>
-                <property name="password" value="pass"/>
+                <property name="password" value="123456"/>
             </dataSource>
         </environment>
     </environments>
