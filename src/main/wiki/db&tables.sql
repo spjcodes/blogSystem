@@ -1,5 +1,8 @@
 create database if not exists blog;
 use blog;
+set character_set_server=utf8;
+set character_set_database=utf8;
+show variables like '%char%';
 
 drop table if exists blog.`articletype`;
 create table  if not exists blog.articletype(
