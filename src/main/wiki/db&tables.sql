@@ -14,7 +14,8 @@ create table  if not exists blog.articletype(
 
 drop table if exists blog.blogarticle;
 create table if not exists blog.blogarticle (
-    title varchar(50)
+    id varchar(64)
+    ,title varchar(50)
     ,intro varchar(200)
     ,bolgCover varchar(100)
     ,typeId varchar(100)
@@ -52,8 +53,8 @@ create table if not exists blog.resumer (
     );
 
 
-drop table if exists blog.selfIntro;
-create table if not exists blog.selfIntro (
+drop table if exists blog.blog.self_intro;
+create table if not exists blog.blog.self_intro (
     id varchar(64)
     ,intro varchar(200)
     ,icon varchar(100)

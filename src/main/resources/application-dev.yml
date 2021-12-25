@@ -23,5 +23,3 @@ mybatis:
   type-aliases-package: classpath:com.jiayeli.blog.dao
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-
