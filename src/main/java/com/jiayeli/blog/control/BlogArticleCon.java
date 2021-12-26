@@ -10,6 +10,7 @@ import com.jiayeli.blog.validator.ValidationResult;
 import com.jiayeli.blog.validator.ValidatorImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,6 +87,7 @@ public class BlogArticleCon extends BaseControl {
         return CommonReturnType.create(bls);
     }
 
+
     @GetMapping("getBlogArticleList")
     @ResponseBody
     public CommonReturnType getBlogArticleList() throws BusinessException {
@@ -94,13 +96,16 @@ public class BlogArticleCon extends BaseControl {
     }
 
 
+    @Value("${spring.resources.static-locations}")
+    String filePath;
+
+
     @PostMapping("uploadFile")
     @ResponseBody
     public CommonReturnType uploadFile(MultipartFile multFile) throws BusinessException {
         if (multFile.isEmpty())
             throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
-        String filePaht = "d:/booksmsFiles/";
-        Map map = this.blogArticleSer.fileUpload(filePaht, multFile);
+        Map map = this.blogArticleSer.fileUpload(filePath.split(":")[1], multFile);
         if (map.isEmpty())
             return CommonReturnType.create("faild", "文件存储失败");
         return CommonReturnType.create(map);

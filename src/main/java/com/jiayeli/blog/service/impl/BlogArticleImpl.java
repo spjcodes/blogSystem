@@ -4,6 +4,7 @@ import com.jiayeli.blog.dao.BlogArticleMapper;
 import com.jiayeli.blog.model.BlogArticle;
 import com.jiayeli.blog.service.BlogArticleSer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,9 @@ public class BlogArticleImpl implements BlogArticleSer {
 
     @Autowired
     private BlogArticleMapper blogArticleMapper;
+
+    @Value("spring.resource.static-locations")
+    private String filePath;
 
     @Override
     public boolean addBlogArticle(BlogArticle blogArticle) {
@@ -76,7 +80,7 @@ public class BlogArticleImpl implements BlogArticleSer {
         String fileSuffix = fileName.substring(fileName.lastIndexOf("."));
 
         //生成新文件名
-        fileName = String.valueOf(System.currentTimeMillis() + fileSuffix);
+        fileName = System.currentTimeMillis() + fileSuffix;
 
         //判断存储文件的目标文件夹是否存在不存在则生成
         File tf = new File(filePath);
@@ -106,13 +110,12 @@ public class BlogArticleImpl implements BlogArticleSer {
         if (!file.isEmpty()) {
             String finename=file.getOriginalFilename();
             String suffixname=file.getOriginalFilename().substring(finename.lastIndexOf("."));
-            finename=String.valueOf(System.currentTimeMillis())+suffixname;
-            String filepath="d:/booksmsFiles/";
-            File tf=new File(filepath);
+            finename= System.currentTimeMillis() +suffixname;
+            File tf=new File(filePath);
             if(!tf.exists()){
                 tf.mkdir();
             }
-            String savefile=filepath+finename;
+            String savefile=filePath+finename;
             try {
                 file.transferTo(new File(savefile));
                 String url="http://localhost:8080/"+finename;
