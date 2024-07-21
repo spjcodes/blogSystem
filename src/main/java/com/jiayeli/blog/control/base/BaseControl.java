@@ -1,44 +1,51 @@
 package com.jiayeli.blog.control.base;
 
-import com.jiayeli.blog.erros.BusinessException;
-import com.jiayeli.blog.erros.CommonErroEum;
-import com.jiayeli.blog.validator.CommonReturnType;
+import com.jiayeli.blog.common.CommonResponseType;
+import com.jiayeli.blog.common.error.PlatformException;
+import com.jiayeli.blog.common.response.ResponseEnums;
+import com.jiayeli.blog.common.utils.logger.LoggerUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.UndeclaredThrowableException;
 
+@Slf4j
 public class BaseControl {
-
-
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public Object handleException(HttpServletRequest request, Exception e) {
+    public Object exceptionHandle(HttpServletRequest request, Exception e) {
+        CommonResponseType commonReturnType  = new CommonResponseType();
 
-        System.out.println("into handle exception");
-        CommonReturnType commonReturnType = new CommonReturnType();
-        Map m = new HashMap<>();
-
-        if(e instanceof BusinessException) {
-            BusinessException businessException = (BusinessException) e;
-            commonReturnType.setStatus("fail");
-            commonReturnType.setObject(e);
-            m.put("erroCode",businessException.getErroCode());
-            m.put("erroMsg", businessException.getErroMsg());
+        if(e instanceof PlatformException) {
+            PlatformException platformException = (PlatformException) e;
+            commonReturnType.setStatus(platformException.getErrCode());
+            commonReturnType.setDesc(platformException.getErrMsg());
+            log.error(commonReturnType.toString());
+        } else if(e instanceof UndeclaredThrowableException){
+            UndeclaredThrowableException undeclaredThrowable = (UndeclaredThrowableException) e;
+            if ((undeclaredThrowable.getUndeclaredThrowable() instanceof PlatformException)) {
+                PlatformException platformException = (PlatformException) undeclaredThrowable.getUndeclaredThrowable();
+                commonReturnType.setStatusCode(platformException.getErrCode());
+                commonReturnType.setDesc(platformException.getErrMsg());
+                log.error("error: " + platformException);
+            } else {
+                commonReturnType.setStatus(ResponseEnums.UNKNOWN_ERROR.getResponseCode());
+                commonReturnType.setDesc(undeclaredThrowable.getUndeclaredThrowable().getMessage());
+                log.error(LoggerUtils.undeclaredThrowableExceptionInfoExtract(undeclaredThrowable));
+            }
         } else {
-            m.put("erroCode", CommonErroEum.UNKONW_ERRO.getErroCode());
-            m.put("erroMsg",e.getMessage());
-            System.out.println("e.getstacktrace" + e.getStackTrace());
-            System.out.println("e.getstacktrace" + e.getLocalizedMessage());
-            System.out.println("e.getstacktrace" + e.getCause());
-            System.out.println("e.getstacktrace" + e.getMessage());
-
+            commonReturnType.setStatus(ResponseEnums.UNKNOWN_ERROR.getResponseCode());
+            commonReturnType.setDesc(e.getMessage());
+            log.error(LoggerUtils.errorInfoExtract(e));
         }
-        return CommonReturnType.create("faild", m);
+        e.printStackTrace();
+        System.out.println(request);
+        return commonReturnType;
+
     }
 }

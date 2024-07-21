@@ -1,10 +1,10 @@
 package com.jiayeli.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class BlogArticle {
