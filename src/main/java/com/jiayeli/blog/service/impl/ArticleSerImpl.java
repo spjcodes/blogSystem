@@ -1,8 +1,12 @@
 package com.jiayeli.blog.service.impl;
 
-import com.jiayeli.blog.dao.BlogArticleMapper;
-import com.jiayeli.blog.model.BlogArticle;
-import com.jiayeli.blog.service.BlogArticleSer;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jiayeli.blog.dao.ArticleMapper;
+import com.jiayeli.blog.model.ArticleModel;
+import com.jiayeli.blog.service.ArticleSer;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,25 +14,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class BlogArticleImpl implements BlogArticleSer {
+public class ArticleSerImpl  extends ServiceImpl<ArticleMapper, ArticleModel> implements ArticleSer {
 
     @Autowired
-    private BlogArticleMapper blogArticleMapper;
+    private ArticleMapper articleMapper;
 
     @Value("spring.resource.static-locations")
     private String filePath;
 
     @Override
-    public boolean addBlogArticle(BlogArticle blogArticle) {
+    public boolean addBlogArticle(ArticleModel blogArticle) {
         try {
-            blogArticle.setCreatetime(new Date(System.currentTimeMillis()));
-            blogArticleMapper.insertSelective(blogArticle);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            blogArticle.setCreatedAt(timestamp);
+            articleMapper.insert(blogArticle);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,33 +43,35 @@ public class BlogArticleImpl implements BlogArticleSer {
 
     @Override
     public boolean deleteBlogArticle(String id) {
-        int i = blogArticleMapper.deleteByPrimaryKey(id);
+        int i = articleMapper.deleteById(id);
         return i>0?true:false;
     }
 
     @Override
-    public boolean updateBlogArticle(BlogArticle blogArticle) {
-        //blogArticle.setCreatetime((Date.from(Instant.ofEpochSecond(System.currentTimeMillis()))));
-        int i = blogArticleMapper.updateByPrimaryKey(blogArticle);
-        return i>0?true:false;
+    public boolean updateBlogArticle(ArticleModel blogArticle) {
+        int i = articleMapper
+                .update(blogArticle, new LambdaUpdateWrapper<ArticleModel>()
+                .eq(StringUtils.isNotBlank(blogArticle.getId()),ArticleModel::getId, "1"));
+        return i > 0;
     }
 
     @Override
-    public BlogArticle getBlogArticleById(String id) {
-        BlogArticle blogArticle = blogArticleMapper.selectByPrimaryKey(id);
-        return blogArticle;
+    public ArticleModel getArticleById(String id) {
+        return articleMapper.selectById(id);
     }
 
     @Override
-    public List<BlogArticle> getBlogArticlesByType(String type) {
+    public List<ArticleModel> getArticleList(String type) {
 
-        return blogArticleMapper.selectArticlesByType(type);
+        return articleMapper
+                .selectList(new LambdaQueryWrapper<ArticleModel>()
+                .eq(ArticleModel::getCategoryId, type));
     }
 
     @Override
-    public List<BlogArticle> getAllBlogArticles() {
+    public List<ArticleModel> getArticleList() {
 
-        return blogArticleMapper.selectAllBlogArticles();
+        return articleMapper.selectList(null);
     }
 
     /**
@@ -103,7 +110,8 @@ public class BlogArticleImpl implements BlogArticleSer {
 
     @Override
     public void visitsCount(String id) {
-        this.blogArticleMapper.visitsCount(id);
+        this.articleMapper.visitsCount(id);
+//        articleMapper.update(new LambdaUpdateWrapper<ArticleModel>().set(ArticleModel::getViewCount, id));
     }
 
     public String ckeditUpload(MultipartFile file, String ckEditorFuncNum) {

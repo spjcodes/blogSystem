@@ -1,18 +1,18 @@
 package com.jiayeli.blog.dao;
 
-import com.jiayeli.blog.model.Comment;
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jiayeli.blog.model.CommentsModel;
 
-public interface CommentMapper {
+public interface CommentMapper extends BaseMapper<CommentsModel> {
     int deleteByPrimaryKey(String id);
 
-    int insert(Comment record);
+    int insert(CommentsModel record);
 
-    int insertSelective(Comment record);
+    int insertSelective(CommentsModel record);
 
-    Comment selectByPrimaryKey(String id);
+    CommentsModel selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(Comment record);
+    int updateByPrimaryKeySelective(CommentsModel record);
 
-    int updateByPrimaryKey(Comment record);
+    int updateByPrimaryKey(CommentsModel record);
 }

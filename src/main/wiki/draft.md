@@ -119,5 +119,4 @@ LEFT JOIN article_comments AS c ON a.id = c.articleId
 LEFT JOIN article_likes AS l ON a.id = l.articleId
 GROUP BY a.id
 ORDER BY commentCount DESC, likeCount DESC;
-
 ```

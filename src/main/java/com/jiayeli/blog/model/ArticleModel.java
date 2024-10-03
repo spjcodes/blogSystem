@@ -1,31 +1,38 @@
 package com.jiayeli.blog.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.jiayeli.blog.enums.ArticleStatusEnum;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.sql.Timestamp;
 
-import java.util.List;
 
-public class ArticleModel {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("article")
+public class ArticleModel  {
     private String id;
     private String title;
     private String author;
-    private String category;
+    private String categoryId;
     private String description;
-    private String image;
-    private String publishDate;
+    private String coverImage;
+    private String tagIds;
     private String content;
-    private List<String> tags;
-    private List<CommentModel> comments;
-    private List<String> likes;
-    private List<String> dislikes;
-    private Integer shareCount;
-    private Integer viewCount;
+    /*    private CommentModel[] comments;*/
+    private int likes;
+    private int dislikes;
+    private int shareCount;
+    private int viewCount;
     private ArticleStatusEnum status;
-    private String createdAt;
-    private String updatedAt;
-    private String deletedAt;
-    private Boolean isDraft;
-    private Boolean isDeleted;
-    private Boolean isPublished;
-    private Boolean isArchived;
-    private Boolean isPublic;
+    private boolean isArchived;
+    private boolean isDelete;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+    private Timestamp deletedAt;
+    private Timestamp publishDate;
 }

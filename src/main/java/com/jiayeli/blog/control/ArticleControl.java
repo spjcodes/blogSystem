@@ -1,13 +1,18 @@
 package com.jiayeli.blog.control;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.jiayeli.blog.common.CommonResponseType;
 import com.jiayeli.blog.common.response.ResponseEnums;
 import com.jiayeli.blog.control.base.BaseControl;
+import com.jiayeli.blog.dao.CommentsMapper;
+import com.jiayeli.blog.dto.ArticleDto;
 import com.jiayeli.blog.erros.BusinessException;
 import com.jiayeli.blog.erros.CommonErroEum;
+import com.jiayeli.blog.model.ArticleModel;
 import com.jiayeli.blog.model.BlogArticle;
-import com.jiayeli.blog.service.BlogArticleSer;
+import com.jiayeli.blog.service.ArticleSer;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,52 +22,65 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("blogArticle")
+@RequestMapping("article")
 @Controller
 @CrossOrigin
-public class BlogArticleControl extends BaseControl {
+public class ArticleControl extends BaseControl {
 
     @Autowired
-    private BlogArticleSer blogArticleSer;
+    private ArticleSer articleSer;
 
-    @PostMapping("addBlogArticle")
+    @Autowired
+    private CommentsMapper commentsMapper;
+
+    @Autowired
+//    private TagsMapper tagsMapper;
+
+    @GetMapping("test")
     @ResponseBody
-    public CommonResponseType addBlogArticle(@RequestBody BlogArticle blogArticle) throws BusinessException {
+    public CommonResponseType test() {
+        return CommonResponseType.ok(articleSer.list());
+    }
 
-        boolean flag = blogArticleSer.addBlogArticle(blogArticle);
+    @PostMapping("addArticle")
+    @ResponseBody
+    public CommonResponseType addArticle(@RequestBody ArticleDto articleDto) throws BusinessException {
+
+        boolean flag = articleSer.addBlogArticle(convert2ArticleModel(articleDto));
         if(!flag)
             throw new BusinessException(CommonErroEum.UNKONW_ERRO);
 
         return CommonResponseType.ok(flag);
     }
 
-    @PostMapping("updateBlogArtcle")
+    @PostMapping("updateBlogArticle")
     @ResponseBody
-    public CommonResponseType updateBlogArtcle(@RequestBody BlogArticle blogArticle) throws BusinessException {
+    public CommonResponseType updateArticle(@RequestBody ArticleModel blogArticle) throws BusinessException {
 
-        boolean b = blogArticleSer.updateBlogArticle(blogArticle);
+        boolean b = articleSer.update(blogArticle, new LambdaUpdateWrapper<ArticleModel>()
+                .eq(ArticleModel::getId, blogArticle.getId()));
         if(!b)
             return CommonResponseType.create(CommonErroEum.ADD_OR_UPDATE_ERRO.getErroCode(), "修改博文失败!");
         return CommonResponseType.ok(b);
     }
 
-    @PostMapping("deleteBlogArtcle")
+    @PostMapping("deleteBlogArticle")
     @ResponseBody
-    public CommonResponseType deleteBlogArtcle(@RequestBody BlogArticle blogArticle) throws BusinessException {
+    public CommonResponseType deleteBlogArticle(@RequestBody BlogArticle blogArticle) throws BusinessException {
         if(StringUtils.isEmpty(blogArticle.getId()))
             throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
-        boolean b = blogArticleSer.deleteBlogArticle(blogArticle.getId());
+        boolean b = articleSer.deleteBlogArticle(blogArticle.getId());
         if(!b)
             return CommonResponseType.error(ResponseEnums.ADD_OR_UPDATE_ERRO, "删除博文失败");
         return CommonResponseType.ok(b);
     }
 
-    @PostMapping("getBlogsArtcleById")
+    @PostMapping("getArticleById")
     @ResponseBody
-    public CommonResponseType getBlogsArtcleById(@RequestBody BlogArticle blogArticle) throws BusinessException {
-        if(StringUtils.isEmpty(blogArticle.getId()))
+    public CommonResponseType getArticleById(@RequestBody String articleId) throws BusinessException {
+        if(StringUtils.isEmpty(articleId))
             throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
-        BlogArticle bloArticle = blogArticleSer.getBlogArticleById(blogArticle.getId());
+        ArticleModel bloArticle = articleSer.getArticleById(articleId);
         return CommonResponseType.ok(bloArticle);
     }
 
@@ -72,15 +90,15 @@ public class BlogArticleControl extends BaseControl {
     public CommonResponseType getBlogsArticleByType(@RequestBody BlogArticle blogArticle) throws BusinessException {
         if(StringUtils.isEmpty(blogArticle.getTypeid()))
             throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
-        List<BlogArticle> bls = blogArticleSer.getBlogArticlesByType(blogArticle.getTypeid());
+        List<ArticleModel> bls = articleSer.getArticleList(blogArticle.getTypeid());
         return CommonResponseType.ok(bls);
     }
 
 
-    @GetMapping("getBlogArticleList")
+    @GetMapping("getArticleList")
     @ResponseBody
-    public CommonResponseType getBlogArticleList() throws BusinessException {
-        List<BlogArticle> allBlogArticles = blogArticleSer.getAllBlogArticles();
+    public CommonResponseType getArticleList() throws BusinessException {
+        List<ArticleModel> allBlogArticles = articleSer.getArticleList();
         return CommonResponseType.ok(allBlogArticles);
     }
 
@@ -93,7 +111,7 @@ public class BlogArticleControl extends BaseControl {
     public CommonResponseType uploadFile(MultipartFile multFile) throws BusinessException {
         if (multFile.isEmpty())
             throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
-        Map map = this.blogArticleSer.fileUpload(filePath.split(":")[1], multFile);
+        Map map = this.articleSer.fileUpload(filePath.split(":")[1], multFile);
         if (map.isEmpty())
             return CommonResponseType.error(ResponseEnums.ADD_OR_UPDATE_ERRO, "文件存储失败");
         return CommonResponseType.ok(map);
@@ -102,14 +120,20 @@ public class BlogArticleControl extends BaseControl {
     @RequestMapping("ckeditorUpload")
     @ResponseBody
     public String ckeditorUpload(@RequestParam("upload") MultipartFile file, String CKEditorFuncNum) throws Exception {
-        return this.blogArticleSer.ckeditUpload(file, CKEditorFuncNum);
+        return this.articleSer.ckeditUpload(file, CKEditorFuncNum);
     }
 
     @PostMapping("visitsCount")
     @ResponseBody
     public void visitsCount(@RequestBody BlogArticle blogArticle) {
-        this.blogArticleSer.visitsCount(blogArticle.getId());
+        this.articleSer.visitsCount(blogArticle.getId());
     }
 
-
+    private ArticleModel convert2ArticleModel(ArticleDto articleDto) {
+        ArticleModel articleModel = new ArticleModel();
+        BeanUtils.copyProperties(articleDto, articleModel);
+        String tagIds = String.join("|",articleDto.getTags());
+        articleModel.setTagIds(tagIds);
+        return articleModel;
+    }
 }

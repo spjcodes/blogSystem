@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiayeli.blog.dao.ResumerMapper">
-  <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.Resumer">
+ <!-- <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.Resumer">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="isShow" jdbcType="BIT" property="isshow" />
     <result column="contetn" jdbcType="VARCHAR" property="contetn" />
@@ -84,6 +84,6 @@
   <select id="getResumerList"  resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     from resumer
-  </select>
+  </select>-->
 
 </mapper>

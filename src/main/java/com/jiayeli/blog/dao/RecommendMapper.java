@@ -1,18 +1,18 @@
 package com.jiayeli.blog.dao;
 
-import com.jiayeli.blog.model.Recommend;
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jiayeli.blog.model.RecommendModel;
 
-public interface RecommendMapper {
+public interface RecommendMapper extends BaseMapper<RecommendModel> {
     int deleteByPrimaryKey(String id);
 
-    int insert(Recommend record);
+    int insert(RecommendModel record);
 
-    int insertSelective(Recommend record);
+    int insertSelective(RecommendModel record);
 
-    Recommend selectByPrimaryKey(String id);
+    RecommendModel selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(Recommend record);
+    int updateByPrimaryKeySelective(RecommendModel record);
 
-    int updateByPrimaryKey(Recommend record);
+    int updateByPrimaryKey(RecommendModel record);
 }
