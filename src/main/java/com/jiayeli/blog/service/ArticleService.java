@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
-public interface ArticleSer extends IService<ArticleModel>  {
+public interface ArticleService extends IService<ArticleModel>  {
 
     boolean addBlogArticle(ArticleModel blogArticle);
     boolean deleteBlogArticle(String id);
@@ -15,7 +15,7 @@ public interface ArticleSer extends IService<ArticleModel>  {
     ArticleModel getArticleById(String id);
     List<ArticleModel> getArticleList(String type);
     List<ArticleModel> getArticleList();
-    Map fileUpload(String filePath, MultipartFile uploadFile);
+    Map<String, String> fileUpload(String filePath, MultipartFile uploadFile);
 
     String ckeditUpload(MultipartFile file, String ckEditorFuncNum);
 

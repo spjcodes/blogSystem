@@ -1,5 +1,6 @@
 package com.jiayeli.blog.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Builder
@@ -22,21 +24,29 @@ public class CommentsModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @TableField("id")
     private String id;
 
+    @TableField("articleId")
     private String articleId;
 
+    @TableField("userId")
     private String userId;
 
+    @TableField("content")
     private String content;
 
-    private LocalDateTime createdAt;
+    @TableField("createdAt")
+    private Date createdAt;
 
-    private LocalDateTime updatedAt;
+    @TableField("updatedAt")
+    private Date updatedAt;
 
+    @TableField("isDeleted")
     private Boolean isDeleted;
 
-    private LocalDateTime deletedAt;
+    @TableField("deletedAt")
+    private Date deletedAt;
 
     @Override
     public String toString() {

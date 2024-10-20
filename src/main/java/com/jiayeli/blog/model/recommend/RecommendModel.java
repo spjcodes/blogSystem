@@ -1,4 +1,4 @@
-package com.jiayeli.blog.model;
+package com.jiayeli.blog.model.recommend;
 
 import lombok.*;
 
@@ -8,14 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 public class RecommendModel {
     private String id;
-
-    private String articleid;
-
-    private String recomid;
-
-    private String recomid1;
-
-    private String recomid2;
+    private int order;
+    private String recommendTopic;
+    private String describe;
+    private String coverImage;
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();

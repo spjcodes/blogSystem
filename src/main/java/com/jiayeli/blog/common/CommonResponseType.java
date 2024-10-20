@@ -2,11 +2,15 @@ package com.jiayeli.blog.common;
 
 
 
+import com.jiayeli.blog.common.response.CommonResponse;
 import com.jiayeli.blog.common.response.ResponseEnums;
+import lombok.Data;
+import lombok.Getter;
 
 import java.util.Objects;
 
-public class CommonResponseType {
+@Data
+public class CommonResponseType implements CommonResponse {
 
     private int statusCode;
 
@@ -38,11 +42,11 @@ public class CommonResponseType {
     }
 
     public static CommonResponseType error(ResponseEnums error) {
-        return create(error.getResponseCode(), error.getDesc(), null);
+        return create(error.getStatusCode(), error.getDesc(), null);
     }
 
     public static CommonResponseType error(ResponseEnums error, String errorMsg) {
-        return create(error.getResponseCode(), errorMsg, null);
+        return create(error.getStatusCode(), errorMsg, null);
     }
 
     public void setStatus(int statusCode) {
@@ -57,21 +61,10 @@ public class CommonResponseType {
         return statusCode;
     }
 
-    public Object getResult() {
-        return result;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
 
-    public String getDesc() {
-        return desc;
-    }
 
     public void setDesc(String desc) {
         this.desc = desc;

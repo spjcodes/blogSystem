@@ -4,7 +4,7 @@ import com.jiayeli.blog.model.ArticleType;
 
 import java.util.List;
 
-public interface ArticleTypeSer {
+public interface ArticleTypeService {
 
     boolean addArticleType(ArticleType blogArticle);
     boolean deleteArticleType(String id);

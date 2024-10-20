@@ -40,7 +40,7 @@ public enum StreamProcessModuleErrorEnum implements CommonResponse, CommonError 
     }
 
     @Override
-    public int getResponseCode() {
+    public int getStatusCode() {
         return getErrCode();
     }
 

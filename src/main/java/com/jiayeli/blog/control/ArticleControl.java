@@ -10,7 +10,7 @@ import com.jiayeli.blog.erros.BusinessException;
 import com.jiayeli.blog.erros.CommonErroEum;
 import com.jiayeli.blog.model.ArticleModel;
 import com.jiayeli.blog.model.BlogArticle;
-import com.jiayeli.blog.service.ArticleSer;
+import com.jiayeli.blog.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import java.util.Map;
 public class ArticleControl extends BaseControl {
 
     @Autowired
-    private ArticleSer articleSer;
+    private ArticleService articleSer;
 
     @Autowired
     private CommentsMapper commentsMapper;

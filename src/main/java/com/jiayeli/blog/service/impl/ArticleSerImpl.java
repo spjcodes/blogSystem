@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jiayeli.blog.dao.ArticleMapper;
 import com.jiayeli.blog.model.ArticleModel;
-import com.jiayeli.blog.service.ArticleSer;
+import com.jiayeli.blog.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ArticleSerImpl  extends ServiceImpl<ArticleMapper, ArticleModel> implements ArticleSer {
+public class ArticleSerImpl  extends ServiceImpl<ArticleMapper, ArticleModel> implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -80,8 +80,8 @@ public class ArticleSerImpl  extends ServiceImpl<ArticleMapper, ArticleModel> im
      * @param uploadFile 上传的文件
      * @return 存储的新文件名
      */
-    public Map fileUpload(String filePath, MultipartFile uploadFile) {
-        Map m = null;
+    public Map<String, String> fileUpload(String filePath, MultipartFile uploadFile) {
+        Map<String, String> m = null;
         //获取原来的文件名，得到后缀为生成新文件名使用
         String fileName = uploadFile.getOriginalFilename();
         String fileSuffix = fileName.substring(fileName.lastIndexOf("."));

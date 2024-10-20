@@ -11,6 +11,6 @@ import com.jiayeli.blog.model.CommentsModel;
  * @author kuro@jiayeli.cn
  * @since 2024-10-04
  */
-public interface CommentsSer extends IService<CommentsModel> {
+public interface CommentsService extends IService<CommentsModel> {
 
 }

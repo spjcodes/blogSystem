@@ -1,18 +1,12 @@
 package com.jiayeli.blog.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jiayeli.blog.model.RecommendModel;
+import com.jiayeli.blog.model.recommend.RecommendModel;
+
+import java.util.List;
 
 public interface RecommendMapper extends BaseMapper<RecommendModel> {
-    int deleteByPrimaryKey(String id);
 
-    int insert(RecommendModel record);
+//    public List<RecommendDto> getRecommendList();
 
-    int insertSelective(RecommendModel record);
-
-    RecommendModel selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(RecommendModel record);
-
-    int updateByPrimaryKey(RecommendModel record);
 }

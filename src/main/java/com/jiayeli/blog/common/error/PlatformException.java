@@ -39,7 +39,7 @@ public class PlatformException extends Exception implements CommonError, CommonR
     }
 
     @Override
-    public int getResponseCode() {
+    public int getStatusCode() {
         return getErrCode();
     }
 

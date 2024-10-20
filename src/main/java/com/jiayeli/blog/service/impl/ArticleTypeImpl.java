@@ -2,13 +2,13 @@ package com.jiayeli.blog.service.impl;
 
 import com.jiayeli.blog.dao.ArticleTypeMapper;
 import com.jiayeli.blog.model.ArticleType;
-import com.jiayeli.blog.service.ArticleTypeSer;
+import com.jiayeli.blog.service.ArticleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ArticleTypeImpl implements ArticleTypeSer {
+public class ArticleTypeImpl implements ArticleTypeService {
 
     @Autowired
     private ArticleTypeMapper articleTypeMapper;
