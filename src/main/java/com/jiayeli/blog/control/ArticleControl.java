@@ -84,7 +84,6 @@ public class ArticleControl extends BaseControl {
         return CommonResponseType.ok(bloArticle);
     }
 
-
     @PostMapping("getBlogsArticleByType")
     @ResponseBody
     public CommonResponseType getBlogsArticleByType(@RequestBody BlogArticle blogArticle) throws BusinessException {

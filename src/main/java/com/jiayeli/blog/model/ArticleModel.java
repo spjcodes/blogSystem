@@ -1,5 +1,6 @@
 package com.jiayeli.blog.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.jiayeli.blog.enums.ArticleStatusEnum;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @TableName("article")
 public class ArticleModel  {
+    @TableId("id")
     private String id;
     private String title;
     private String author;
