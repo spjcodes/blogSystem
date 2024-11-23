@@ -8,7 +8,7 @@ import com.jiayeli.blog.dao.CommentsMapper;
 import com.jiayeli.blog.dto.ArticleDto;
 import com.jiayeli.blog.erros.BusinessException;
 import com.jiayeli.blog.erros.CommonErroEum;
-import com.jiayeli.blog.model.ArticleModel;
+import com.jiayeli.blog.model.article.ArticleModel;
 import com.jiayeli.blog.model.BlogArticle;
 import com.jiayeli.blog.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;

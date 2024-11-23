@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jiayeli.blog.dao.ArticleMapper;
-import com.jiayeli.blog.model.ArticleModel;
+import com.jiayeli.blog.model.article.ArticleModel;
 import com.jiayeli.blog.service.ArticleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

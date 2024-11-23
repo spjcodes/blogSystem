@@ -1,7 +1,7 @@
 package com.jiayeli.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jiayeli.blog.model.ArticleModel;
+import com.jiayeli.blog.model.article.ArticleModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

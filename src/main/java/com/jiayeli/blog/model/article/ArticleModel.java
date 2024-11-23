@@ -1,5 +1,6 @@
-package com.jiayeli.blog.model;
+package com.jiayeli.blog.model.article;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.jiayeli.blog.enums.ArticleStatusEnum;
@@ -30,6 +31,9 @@ public class ArticleModel  {
     private int dislikes;
     private int shareCount;
     private int viewCount;
+    @Builder.Default
+    @TableField("isPublic")
+    private boolean isPublic = true;
     private ArticleStatusEnum status;
     private boolean isArchived;
     private boolean isDelete;

@@ -43,7 +43,7 @@ public class mybatisPluseGenrator {
                 )
                 .packageConfig(builder ->
 
-                        builder.parent("src.main.java.cn.jiayeli.blog")   // 设置父包名
+                        builder.parent("src.main.java.com.jiayeli.blog")   // 设置父包名
                                 .moduleName("")             // 设置父包模块名
                                 .entity("model")            //设置 Entity 包名
                                 .mapper("dao")              //设置 Mapper 包名
@@ -54,7 +54,7 @@ public class mybatisPluseGenrator {
                                 .pathInfo(Collections.singletonMap(OutputFile.xml, "/tmp/dolen/src/main/resources/mapper")) // 设置mapperXml生成路径
                 )
                 .strategyConfig(builder ->
-                        builder.addInclude("comments", "recommendInfo") // 设置需要生成的表名 | 增加表匹配(内存过滤)
+                        builder.addInclude("articleCategory", "articleCategoryInfo") // 设置需要生成的表名 | 增加表匹配(内存过滤)
                                 .enableCapitalMode()    //开启大写命名
                                 .addTablePrefix("t_", "c_") // 设置过滤表前缀
                                 .addTableSuffix("Model")

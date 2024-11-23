@@ -1,7 +1,8 @@
 package com.jiayeli.blog.dao;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jiayeli.blog.model.ArticleType;
+import com.jiayeli.blog.model.article.ArticleType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

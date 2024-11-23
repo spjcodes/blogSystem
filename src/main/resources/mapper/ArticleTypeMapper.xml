@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiayeli.blog.dao.ArticleTypeMapper">
-  <!--<resultMap id="BaseResultMap" type="com.jiayeli.blog.model.ArticleType">
+  <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.article.ArticleType">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="typeName" jdbcType="VARCHAR" property="typename" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
@@ -20,7 +20,7 @@
     delete from articletype
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jiayeli.blog.model.ArticleType">
+  <insert id="insert" parameterType="com.jiayeli.blog.model.article.ArticleType">
     <selectKey keyProperty="id" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -29,7 +29,7 @@
     values (#{id,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
       #{totals,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.jiayeli.blog.model.ArticleType">
+  <insert id="insertSelective" parameterType="com.jiayeli.blog.model.article.ArticleType">
     <selectKey keyProperty="id" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -63,7 +63,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jiayeli.blog.model.ArticleType">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiayeli.blog.model.article.ArticleType">
     update articletype
     <set>
       <if test="typename != null">
@@ -78,7 +78,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jiayeli.blog.model.ArticleType">
+  <update id="updateByPrimaryKey" parameterType="com.jiayeli.blog.model.article.ArticleType">
     update articletype
     set typeName = #{typename,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
@@ -92,5 +92,5 @@
 
   <select id="selectTypes" resultType="string">
     select typeName from articletype;
-  </select>-->
+  </select>
 </mapper>

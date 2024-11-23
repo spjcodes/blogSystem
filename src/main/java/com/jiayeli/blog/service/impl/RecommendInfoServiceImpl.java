@@ -9,7 +9,7 @@ import com.jiayeli.blog.dao.RecommendListMapper;
 import com.jiayeli.blog.dto.ArticleDto;
 import com.jiayeli.blog.dto.RecommendArticleDto;
 import com.jiayeli.blog.dto.TitleComponentsModel;
-import com.jiayeli.blog.model.ArticleModel;
+import com.jiayeli.blog.model.article.ArticleModel;
 import com.jiayeli.blog.model.recommend.RecommendInfoModel;
 import com.jiayeli.blog.model.recommend.RecommendListModel;
 import com.jiayeli.blog.service.RecommendInfoService;

@@ -1,11 +1,8 @@
 package com.jiayeli.blog.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jiayeli.blog.model.ArticleModel;
-import com.jiayeli.blog.model.BlogArticle;
+import com.jiayeli.blog.model.article.ArticleModel;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface ArticleMapper extends BaseMapper<ArticleModel> {
