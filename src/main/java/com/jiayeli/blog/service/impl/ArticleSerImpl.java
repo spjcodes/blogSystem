@@ -139,4 +139,9 @@ public class ArticleSerImpl  extends ServiceImpl<ArticleMapper, ArticleModel> im
         }
         return "{\"uploaded\":0,\"error\":{\"message\":\"upload file is not success!\"}}";
     }
+
+    @Override
+    public List<ArticleModel> getArticleByIds(List<String> articleIdList) {
+        return  articleMapper.selectBatchIds(articleIdList);
+    }
 }

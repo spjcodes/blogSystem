@@ -11,6 +11,7 @@ import com.jiayeli.blog.erros.CommonErroEum;
 import com.jiayeli.blog.model.article.ArticleModel;
 import com.jiayeli.blog.model.BlogArticle;
 import com.jiayeli.blog.service.ArticleService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +83,14 @@ public class ArticleControl extends BaseControl {
             throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
         ArticleModel bloArticle = articleSer.getArticleById(articleId);
         return CommonResponseType.ok(bloArticle);
+    }
+    @PostMapping("getArticleByIds")
+    @ResponseBody
+    public CommonResponseType getArticleByIds(@RequestBody List<String> articleIdList) throws BusinessException {
+        if(ObjectUtils.isEmpty(articleIdList))
+            throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
+        List<ArticleModel> bloArticles = articleSer.getArticleByIds(articleIdList);
+        return CommonResponseType.ok(bloArticles);
     }
 
     @PostMapping("getBlogsArticleByType")

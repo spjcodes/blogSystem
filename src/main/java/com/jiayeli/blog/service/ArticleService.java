@@ -20,5 +20,7 @@ public interface ArticleService extends IService<ArticleModel>  {
     String ckeditUpload(MultipartFile file, String ckEditorFuncNum);
 
     void visitsCount(String blogArticle);
+
+    List<ArticleModel> getArticleByIds(List<String> articleIdList);
 }
 

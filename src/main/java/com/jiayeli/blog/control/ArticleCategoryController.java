@@ -27,7 +27,7 @@ public class ArticleCategoryController extends BaseControl {
 
     @RequestMapping("getArticleCategoryListByAuthorId")
     @ResponseBody
-    public CommonResponseType getArticleCategoryList(String id) {
-        return CommonResponseType.ok(articleCategoryService.getArticleCategoryListByAuthorId(id));
+    public CommonResponseType getArticleCategoryList(String authorId) {
+        return CommonResponseType.ok(articleCategoryService.getArticleCategoryListByAuthorId(authorId));
     }
 }
