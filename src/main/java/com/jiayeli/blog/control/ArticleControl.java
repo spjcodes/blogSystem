@@ -8,8 +8,8 @@ import com.jiayeli.blog.dao.CommentsMapper;
 import com.jiayeli.blog.dto.ArticleDto;
 import com.jiayeli.blog.erros.BusinessException;
 import com.jiayeli.blog.erros.CommonErroEum;
-import com.jiayeli.blog.model.article.ArticleModel;
 import com.jiayeli.blog.model.BlogArticle;
+import com.jiayeli.blog.model.article.ArticleModel;
 import com.jiayeli.blog.service.ArticleService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -114,12 +114,18 @@ public class ArticleControl extends BaseControl {
     @Value("${spring.resources.static-locations}")
     String filePath;
 
+    @PostMapping("pic")
+    public CommonResponseType updatePic(@RequestParam("file") MultipartFile file, @RequestParam("id") int id){
+        System.out.println(file + "  id: " +id);
+        return null;
+    }
+
     @PostMapping("uploadFile")
     @ResponseBody
-    public CommonResponseType uploadFile(MultipartFile multFile) throws BusinessException {
-        if (multFile.isEmpty())
+    public CommonResponseType uploadFile(@RequestParam("file") MultipartFile fileList) throws BusinessException {
+        if (fileList.isEmpty())
             throw new BusinessException(CommonErroEum.PARAMETER_NOT_VALID);
-        Map map = this.articleSer.fileUpload(filePath.split(":")[1], multFile);
+        Map<String, String> map = this.articleSer.fileUpload(filePath.split(":")[1], fileList);
         if (map.isEmpty())
             return CommonResponseType.error(ResponseEnums.ADD_OR_UPDATE_ERRO, "文件存储失败");
         return CommonResponseType.ok(map);

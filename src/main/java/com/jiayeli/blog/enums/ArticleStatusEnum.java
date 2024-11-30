@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum ArticleStatusEnum {
-  draft("draft"),
-  published("published"),
-  archived("archived"),
-  deleted("deleted");
+  Draft("Draft"),
+  Published("Published"),
+  Archived("Archived"),
+  Deleted("Deleted");
 
   private final String value;
 
@@ -16,4 +16,3 @@ public enum ArticleStatusEnum {
   }
 
 }
-
