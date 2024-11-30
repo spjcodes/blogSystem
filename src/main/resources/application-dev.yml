@@ -5,8 +5,7 @@ spring:
     password: kuro@Pass
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8&useSSL=false
-
+    url: jdbc:mysql://localhost:3306/blog?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8&useSSL=false
     dynamic:
       primary: mysql_dev
       strict: false
@@ -14,10 +13,9 @@ spring:
         mysql_dev:
           type: com.zaxxer.hikari.HikariDataSource
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8&useSSL=false
+          url: jdbc:mysql://localhost:3306/blog?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8&useSSL=false
           username: kuro
           password: kuro@Pass
-
   resources:
     static-locations: file:/home/kuro/Pictures/blogSource/
 
@@ -31,6 +29,10 @@ spring:
       #设置总上传的数据大小，单位MB和KB都可以
       max-request-size: 1024MB
 
+springdoc:
+  api-docs:
+    #默认为true开启
+    enabled: true
 
 # Logger Config
 logging:
@@ -51,3 +53,4 @@ mybatis-plus:
   type-aliases-package: classpath:com.jiayeli.blog.dao
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false

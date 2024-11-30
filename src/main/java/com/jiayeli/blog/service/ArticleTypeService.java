@@ -1,10 +1,10 @@
 package com.jiayeli.blog.service;
 
-import com.jiayeli.blog.model.ArticleType;
+import com.jiayeli.blog.model.article.ArticleType;
 
 import java.util.List;
 
-public interface ArticleTypeSer {
+public interface ArticleTypeService {
 
     boolean addArticleType(ArticleType blogArticle);
     boolean deleteArticleType(String id);

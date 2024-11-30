@@ -34,12 +34,12 @@ public class BaseControl {
                 commonReturnType.setDesc(platformException.getErrMsg());
                 log.error("error: " + platformException);
             } else {
-                commonReturnType.setStatus(ResponseEnums.UNKNOWN_ERROR.getResponseCode());
+                commonReturnType.setStatus(ResponseEnums.UNKNOWN_ERROR.getStatusCode());
                 commonReturnType.setDesc(undeclaredThrowable.getUndeclaredThrowable().getMessage());
                 log.error(LoggerUtils.undeclaredThrowableExceptionInfoExtract(undeclaredThrowable));
             }
         } else {
-            commonReturnType.setStatus(ResponseEnums.UNKNOWN_ERROR.getResponseCode());
+            commonReturnType.setStatus(ResponseEnums.UNKNOWN_ERROR.getStatusCode());
             commonReturnType.setDesc(e.getMessage());
             log.error(LoggerUtils.errorInfoExtract(e));
         }

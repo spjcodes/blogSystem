@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiayeli.blog.dao.RecommendMapper">
-  <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.Recommend">
+ <!-- <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.recommend.RecommendModel">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="articleId" jdbcType="VARCHAR" property="articleid" />
     <result column="recomid" jdbcType="VARCHAR" property="recomid" />
@@ -21,13 +21,13 @@
     delete from recommend
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jiayeli.blog.model.Recommend">
+  <insert id="insert" parameterType="com.jiayeli.blog.model.recommend.RecommendModel">
     insert into recommend (id, articleId, recomid, 
       recomid1, recomid2)
     values (#{id,jdbcType=VARCHAR}, #{articleid,jdbcType=VARCHAR}, #{recomid,jdbcType=VARCHAR}, 
       #{recomid1,jdbcType=VARCHAR}, #{recomid2,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jiayeli.blog.model.Recommend">
+  <insert id="insertSelective" parameterType="com.jiayeli.blog.model.recommend.RecommendModel">
     insert into recommend
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jiayeli.blog.model.Recommend">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiayeli.blog.model.recommend.RecommendModel">
     update recommend
     <set>
       <if test="articleid != null">
@@ -82,12 +82,15 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jiayeli.blog.model.Recommend">
+  <update id="updateByPrimaryKey" parameterType="com.jiayeli.blog.model.recommend.RecommendModel">
     update recommend
     set articleId = #{articleid,jdbcType=VARCHAR},
       recomid = #{recomid,jdbcType=VARCHAR},
       recomid1 = #{recomid1,jdbcType=VARCHAR},
       recomid2 = #{recomid2,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
+<!-- <select id="getRecommendList" resultType="com.jiayeli.blog.dto.RecommendDto">
+   select * from
+ </select>-->
 </mapper>

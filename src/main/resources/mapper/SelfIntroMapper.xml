@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiayeli.blog.dao.SelfIntroMapper">
-  <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.SelfIntro">
+ <!-- <resultMap id="BaseResultMap" type="com.jiayeli.blog.model.SelfIntro">
     <result column="id" jdbcType="BIT" property="id" />
     <result column="intro" jdbcType="VARCHAR" property="intro" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
@@ -57,5 +57,5 @@
         select <include refid="baseField" />
         from self_intro
         where id = #{id, jdbcType=TINYINT}
-    </select>
+    </select>-->
 </mapper>

@@ -1,4 +1,4 @@
-package com.jiayeli.blog.model;
+package com.jiayeli.blog.model.article;
 
 public class ArticleType {
     private String id;

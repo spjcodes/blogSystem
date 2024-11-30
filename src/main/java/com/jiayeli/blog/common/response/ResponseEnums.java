@@ -35,7 +35,7 @@ public enum ResponseEnums implements CommonResponse, CommonError {
     }
 
     @Override
-    public int getResponseCode() {
+    public int getStatusCode() {
         return this.code;
     }
 
@@ -51,7 +51,7 @@ public enum ResponseEnums implements CommonResponse, CommonError {
 
     @Override
     public int getErrCode() {
-        return getResponseCode();
+        return getStatusCode();
     }
 
     @Override

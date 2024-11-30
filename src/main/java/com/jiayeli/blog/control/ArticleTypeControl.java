@@ -1,12 +1,11 @@
 package com.jiayeli.blog.control;
 
 import com.jiayeli.blog.common.CommonResponseType;
-import com.jiayeli.blog.common.response.CommonResponse;
 import com.jiayeli.blog.common.response.ResponseEnums;
 import com.jiayeli.blog.erros.BusinessException;
 import com.jiayeli.blog.erros.CommonErroEum;
-import com.jiayeli.blog.model.ArticleType;
-import com.jiayeli.blog.service.ArticleTypeSer;
+import com.jiayeli.blog.model.article.ArticleType;
+import com.jiayeli.blog.service.ArticleTypeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ public class ArticleTypeControl {
 
 
     @Autowired
-    private ArticleTypeSer articleTypeSer;
+    private ArticleTypeService articleTypeSer;
 
     @PostMapping("addArticleType")
     @ResponseBody

@@ -2,7 +2,7 @@ package com.jiayeli.blog.common.response;
 
 public interface CommonResponse {
 
-    public int getResponseCode();
+    public int getStatusCode();
 
     public String getDesc();
 
