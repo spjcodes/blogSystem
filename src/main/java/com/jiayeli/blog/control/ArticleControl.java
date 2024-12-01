@@ -111,16 +111,10 @@ public class ArticleControl extends BaseControl {
     }
 
 
-    @Value("${spring.resources.static-locations}")
+    @Value("${spring.web.resources.static-locations}")
     String filePath;
 
-    @PostMapping("pic")
-    public CommonResponseType updatePic(@RequestParam("file") MultipartFile file, @RequestParam("id") int id){
-        System.out.println(file + "  id: " +id);
-        return null;
-    }
-
-    @PostMapping("uploadFile")
+     @PostMapping("uploadFile")
     @ResponseBody
     public CommonResponseType uploadFile(@RequestParam("file") MultipartFile fileList) throws BusinessException {
         if (fileList.isEmpty())

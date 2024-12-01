@@ -16,11 +16,12 @@ spring:
           url: jdbc:mysql://localhost:3306/blog?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8&useSSL=false
           username: kuro
           password: kuro@Pass
-  resources:
-    static-locations: file:/home/kuro/Pictures/blogSource/
+  web:
+    resources:
+      static-locations: file:/home/kuro/Pictures/blogSource/
 
   mvc:
-    static-path-pattern: /pic/**
+    static-path-pattern: /pictures/**
 
   servlet:
     multipart:
