@@ -44,7 +44,7 @@ public class ArticleSerImpl  extends ServiceImpl<ArticleMapper, ArticleModel> im
     @Override
     public boolean deleteBlogArticle(String id) {
         int i = articleMapper.deleteById(id);
-        return i>0?true:false;
+        return i > 0;
     }
 
     @Override
