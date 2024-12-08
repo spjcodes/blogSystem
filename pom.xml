@@ -232,9 +232,72 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>3.2.1</version>
                 </plugin>
             </plugins>
+
         </pluginManagement>
+
+        <plugins>
+
+            <!--拷贝依赖到jar外面的lib目录-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!--指定的依赖路径-->
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <executable>true</executable>
+            　　　　　<layout>ZIP</layout>
+                    <mainClass>com.jiayeli.blog.BlogApplication</mainClass>
+                    <!--只包含当前项目的代码-->
+                    <includes>
+                        <!--  <include>
+                            <groupId>${groupId}</groupId>
+                            <artifactId>${artifactId}</artifactId>
+                        </include>-->
+                        <!--或者-->
+                        <!--依赖jar不打进项目jar包中-->
+                        <include>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
+                        </include>
+                    </includes>
+                    <!--需要排除的依赖项目GroupId-->
+                    <!--  <excludeGroupIds>
+                    com.mysql.jc.jdbc,
+                    org.springframework.boot,
+                    org.springframework
+                     </excludeGroupIds> -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
